@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://objects/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/ScrollGround.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/SpawnerFlock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/UI/UIBars.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/Skeleton.tscn" type="PackedScene" id=5]
+
+[node name="Level" type="Node2D"]
+
+[node name="ScrollGround" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 130, 120 )
+current = true
+
+[node name="UIBars" parent="Camera2D" instance=ExtResource( 4 )]
+margin_left = -130.0
+margin_top = -123.0
+margin_right = -130.0
+margin_bottom = -123.0
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 47, 79 )
+
+[node name="SpawnerFlock" parent="." instance=ExtResource( 3 )]
+position = Vector2( 234, 2 )
+enemy_types = [ ExtResource( 5 ) ]
+
+[node name="Enemies" type="Node" parent="."]
+
+[connection signal="change_hp_mp" from="Player" to="Camera2D/UIBars" method="_on_Player_change_hp_mp"]
